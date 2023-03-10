@@ -26,8 +26,8 @@ def substep():
     base = (x[p] * inv_dx - 0.5).cast(int)
     fx = x[p] * inv_dx - base.cast(float)
     w = [0.5 * (1.5 - fx) ** 2, 0.75 - (fx - 1) ** 2, 0.5 * (fx - 0.5) ** 2]
-    stress = -dt * p_vol * (J[p] - 1) * 4 * inv_dx * inv_dx * E
-    affine = ti.Matrix([[stress, 0], [0, stress]]) + p_mass * C[p]
+    stress = -dt * p_vol * (J[p] - 1) * 4 * inv_dx * inv_dx * E ########################
+    affine = ti.Matrix([[stress, 0], [0, stress]]) + p_mass * C[p] #######################
     for i in ti.static(range(3)):
       for j in ti.static(range(3)):
         offset = ti.Vector([i, j])
@@ -68,7 +68,7 @@ def substep():
         new_C += 4 * weight * g_v.outer_product(dpos) * inv_dx
     v[p] = new_v
     x[p] += dt * v[p]
-    J[p] *= 1 + dt * new_C.trace()
+    J[p] *= 1 + dt * new_C.trace() ######
     C[p] = new_C
 
 for i in range(n_particles):

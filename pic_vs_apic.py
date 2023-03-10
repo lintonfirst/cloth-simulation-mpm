@@ -25,7 +25,7 @@ def clamp_pos(pos):
 def substep_PIC():
     for p in x:
         base = (x[p] * inv_dx - 0.5).cast(int)
-        fx = x[p] * inv_dx - base.cast(float)
+        fx  = x[p] * inv_dx - base.cast(float)
         # Quadratic B-spline
         w = [0.5 * (1.5 - fx) ** 2, 0.75 - (fx - 1) ** 2, 0.5 * (fx - 0.5) ** 2]
         for i in ti.static(range(3)):
