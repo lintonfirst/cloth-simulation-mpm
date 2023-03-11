@@ -36,20 +36,26 @@ for frame in range(240):
     print("frame{} start".format(frame))
     subFrame = 0
     frameTime = 0.0
-    # while frameTime < params.frameDt:
-    #     # print("subframe{} start".format(frame*20+i))
-    #     sim.step(totalFrame)
-    #     frameTime += params.dt[None]
-    #     totalFrame += 1
+    while frameTime < params.frameDt:
+        # print("subframe{} start".format(frame*20+i))
+        sim.step(totalFrame)
+        frameTime += params.dt[None]
+        totalFrame += 1
     # timeBench.report()
     if params.gui:
         # Draw a smaller ball to avoid visual penetration
         scene.particles(sim.particleSystem.position, radius=params.particleRadius, per_vertex_color=sim.particleSystem.color)
-        # if params.ifUseRigidbody:
-        #     scene.mesh(sim.rigidbody.MeshPoint, color=(1, 1, 1), two_sided=True)
+        if params.ifUseRigidbody:
+            scene.mesh(sim.rigidbody.MeshPoint, color=(1, 1, 1), two_sided=True)
         scene.mesh(sim.collideBodySystem.meshPoint, per_vertex_color=sim.collideBodySystem.meshColor, two_sided=True)
         scene.point_light(pos=(0.0, 0.0, 5.0), color=(1, 1, 1))
-        # canvas.scene(scene)
+        canvas.scene(scene)
+
+        pixels_img = window.get_image_buffer_as_numpy()
+        video_manager.write_frame(pixels_img)
 
         window.show()
     frame += 1
+
+if params.gui:
+    video_manager.make_video(mp4=True)

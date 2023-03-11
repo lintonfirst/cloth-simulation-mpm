@@ -213,8 +213,8 @@ class SceneManager:
         params.rigidBodyInitV = [8 ,0, 0]
         self.LongCube()
 
-        camera.position(0,0,3)
-        camera.lookat(0.0, 0.0, 0.0)
+        camera.position(-5.0, 10.0, 2.0)
+        camera.lookat(0.0, 0.0, -4.0)
         camera.up(0.0, 0.0, 1.0)
 
 
